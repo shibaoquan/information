@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 import redis
 from flask_wtf.csrf import CSRFProtect
 from flask_session import  Session
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
+
 
 
 
@@ -35,6 +38,12 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 # 创建redis 对象
 redis_store = redis.StrictRedis(host=Config.REDIS_HOST, port=Config.REDIS_PORT)
+
+# 创建骄脚本管理器对象
+manager = Manager(app)
+Migrate(app, manager)
+manager.add_command("db", MigrateCommand)
+
 
 # 配置session
 Session(app)
