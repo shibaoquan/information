@@ -9,6 +9,7 @@ Migrate(app, manager)
 manager.add_command("db", MigrateCommand)
 
 
+
 @app.route('/')
 def index():
     return 'Hello World'
