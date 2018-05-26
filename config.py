@@ -1,3 +1,4 @@
+import logging
 import redis
 from flask_wtf.csrf import CSRFProtect
 
@@ -22,20 +23,18 @@ class Config(object):
 
 class DevelopementConfig(Config):
     """开发模式下的配置"""
-    pass
+    LOG_LEVEL = logging.DEBUG
 
 class ProductionConfig(Config):
     """生产模式下的配置"""
     DEBUG = False
+    LOG_LEVEL = logging.ERROR
+
 
 class Unittest(Config):
     """测试模式下的配置"""
     TESTING = True
-
-
-
-
-
+    LOG_LEVEL = logging.DEBUG
 
 # 定义配置字典
 configs = {
